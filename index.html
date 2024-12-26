@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <style>
+        body {
+            background-color: darkcyan;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background-color: darkslategrey;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            display: flex;
+            border: 2px solid darkslategrey;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: white;
+        }
+
+        .left {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            border-right: 2px solid darkslategrey;
+        }
+
+        section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid darkslategrey;
+        }
+
+        section:last-child {
+            border-bottom: none; /* Remove bottom border for the last section */
+        }
+
+        input[type="number"] {
+            width: 80%;
+            height: 40px;
+            font-size: 16px;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .button {
+            width: 80%;
+            height: 40px;
+            background-color: gray;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button:hover {
+            background-color: darkslategray;
+        }
+
+        aside {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 300px;
+            height: 100%;
+        }
+
+        #password {
+            font-size: 18px;
+            color: darkslategrey;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Huge Header -->
+    <header>
+        Password Generator
+    </header>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Side: Input and Button -->
+        <div class="left">
+            <section>
+                <input type="number" id="character_range" value="8" min="2" max="20" placeholder="Password Length">
+            </section>
+            <section>
+                <button class="button" onclick="generatePassword()">Generate</button>
+            </section>
+        </div>
+
+        <!-- Right Side: Password Display -->
+        <aside>
+            <div id="password"></div>
+        </aside>
+    </div>
+
+    <script>
+        // Function to generate a password based on the input length
+        function generatePassword() {
+            const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // Character set
+            const range = document.getElementById('character_range').value; // Get the input value for password length
+            let password = '';
+
+            // Generate password by randomly selecting characters
+            for (let i = 0; i < range; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length); // Random index in charset
+                password += charset[randomIndex]; // Append the random character to the password
+            }
+
+            // Display the generated password
+            document.getElementById('password').textContent = password;
+        }
+    </script>
+</body>
+</html>
